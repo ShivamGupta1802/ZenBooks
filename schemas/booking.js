@@ -16,7 +16,7 @@ const booking={
             name:'hotelRoom',
             title:'Hotel Room',
             type:'reference',
-            to:{type :'hotelRoom'},
+            to:{type :'hotelroom'},
             validation:Rule=>Rule.required(),
         }),
         defineField({
