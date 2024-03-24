@@ -4,11 +4,13 @@ import Header from "@/Components/Header/Header";
 import Footer from "@/Components/Footer/Footer";
 import ThemeProvider from "@/Components/ThemeProvider/ThemeProvider";
 import AuthProvider from "@/Components/AuthProvider/AuthProvider";
+import Toast from "@/Components/Toast/Toast";
 
-const poppins = Poppins({ subsets: ["latin"] ,
-weight:['400','500','700','900'],
-style:['italic','normal'],
-variable:'--font-poppins',
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["400", "500", "700", "900"],
+  style: ["italic", "normal"],
+  variable: "--font-poppins",
 });
 
 export const metadata = {
@@ -21,15 +23,17 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={poppins.className}>
         <AuthProvider>
+          <ThemeProvider>
+            <Toast/>
 
-        <ThemeProvider>
-      <main className="font-normal">
-        <Header/>
-        {children}
-       <Footer/>
-        </main>
+            <main className="font-normal">
+              <Header />
+              {children}
+              <Footer />
+            </main>
 
-        </ThemeProvider>
+           
+          </ThemeProvider>
         </AuthProvider>
       </body>
     </html>
