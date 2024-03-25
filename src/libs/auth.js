@@ -2,6 +2,7 @@
 import { SanityAdapter, SanityCredentials } from "next-auth-sanity";
 import GitHubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
+import sanityClient from "./sanity";
 export const authOptions={
     providers: [
         GitHubProvider({
@@ -9,8 +10,8 @@ export const authOptions={
           clientSecret: process.env.GITHUB_CLIENT_SECRET
         }),
         GoogleProvider({
-            clientId: process.env.GOOGLE_ID,
-            clientSecret: process.env.GOOGLE_SECRET,
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
           }),
           SanityCredentials(sanityClient),
       ],

@@ -1,8 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
+
+import {signUp} from "next-auth-sanity/client"
+import {signIn,useSession} from "next-auth/react"
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const defaultFormData = {
   name: "",
@@ -22,17 +27,42 @@ const Auth = () => {
     setformdata({...formdata,[name]:value})
   }
 
+  const {data:session}=useSession();
+
+ const router=useRouter();
+
+  useEffect(() => {
+    
+    if(session) router.push("/");
+   
+  },[router,session] );
+  
+
+  const loginHandler=async ()=>
+  {
+    try{
+      await signIn();
+       router.push("/");
+    }
+    catch(error)
+    {
+      console.log(error);
+      toast.error("Something went worng")
+    }
+  }
+
+
   const handleSubmit= async (e)=>{
        e.preventDefault();
        try{
-        // const user=await signUp(formdata)
-        // if(user)
-        // toast.success('Success. Please sign in');
+        const user=await signUp(formdata)
+        if(user)
+        toast.success('Success. Please sign in');
         console.log(formdata);
        }
        catch(error){
             console.log(error);
-            // toast.error("Something went Wrong");
+            toast.error("Something went Wrong");
        }
        finally{
         setformdata(defaultFormData);
@@ -50,9 +80,9 @@ const Auth = () => {
           </h1>
           <p>Or</p>
           <span className="inline-flex items-center">
-            <AiFillGithub className="mr-3 text-4xl cursor-pointer text-black dark:text-white" />
+            <AiFillGithub onClick={loginHandler} className="mr-3 text-4xl cursor-pointer text-black dark:text-white" />
             |
-            <FcGoogle className="ml-3 text-4xl cursor-pointer" />
+            <FcGoogle onClick={loginHandler} className="ml-3 text-4xl cursor-pointer" />
           </span>
         </div>
 
@@ -93,7 +123,7 @@ const Auth = () => {
             Sign Up
           </button>
         </form>
-        <button className="text-blue-700 underline">Login</button>
+        <button onClick={loginHandler} className="text-blue-700 underline">Login</button>
       </div>
     </section>
   );
