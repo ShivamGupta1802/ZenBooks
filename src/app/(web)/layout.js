@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
           <ThemeProvider>
             <Toast/>
 
-            <main className="font-normal">
+            <main className="font-normal container mx-auto px-8">
               <Header />
               {children}
               <Footer />
