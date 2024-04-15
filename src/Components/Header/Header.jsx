@@ -51,7 +51,7 @@ const Header = () => {
                 className="cursor-pointer"
                 onClick={() => {
                   setDarkTheme(false);
-                  localStorage.remove("hotel-theme");
+                  localStorage.removeItem("hotel-theme");
                 }}
               />
             ) : (
@@ -59,7 +59,7 @@ const Header = () => {
                 className="cursor-pointer"
                 onClick={() => {
                   setDarkTheme(true);
-                  localStorage.setItem("hotel-theme");
+                  localStorage.setItem('hotel-theme','true');
                 }}
               />
             )}
