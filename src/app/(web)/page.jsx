@@ -9,6 +9,7 @@ import React from 'react'
 const page = async() => {
   const featuredRoom=await getFeaturedRoom();
   // console.log(featuredRoom);
+
   return (
     <>
       <HeroSection/>
