@@ -32,7 +32,7 @@ const Rooms = () => {
   // console.log(data);
 
   const filterRooms = (rooms) => {
-    return rooms.filter(room => {
+    return rooms.filter((room) => {
       // Apply room type filter
       if (
         roomTypeFilter &&
@@ -53,23 +53,23 @@ const Rooms = () => {
     });
   };
 
-  const filteredRooms = filterRooms(data||[]);
+  const filteredRooms = filterRooms(data || []);
   // console.log(filteredRooms);
   return (
-    <div className='container mx-auto pt-10'>
-    <Search
-      roomTypeFilter={roomTypeFilter}
-      searchQuery={searchQuery}
-      setRoomTypeFilter={setRoomTypeFilter}
-      setSearchQuery={setSearchQuery}
-    />
+    <div className="container mx-auto pt-10">
+      <Search
+        roomTypeFilter={roomTypeFilter}
+        searchQuery={searchQuery}
+        setRoomTypeFilter={setRoomTypeFilter}
+        setSearchQuery={setSearchQuery}
+      />
 
-    <div className='flex mt-20 justify-between flex-wrap'>
-      {filteredRooms.map(room => (
-        <RoomCard key={room._id} room={room} />
-      ))}
+      <div className="flex mt-20 justify-between flex-wrap">
+        {filteredRooms.map((room) => (
+          <RoomCard key={room._id} room={room} />
+        ))}
+      </div>
     </div>
-  </div>
   );
 };
 
