@@ -9,11 +9,28 @@ import { MdOutlineCleaningServices } from "react-icons/md";
 import { LiaFireExtinguisherSolid } from "react-icons/lia";
 import { AiOutlineMedicineBox } from "react-icons/ai";
 import { GiSmokeBomb } from "react-icons/gi";
+import BookRoomCta from "@/Components/BookRoomCta/BookRoomCta";
+import { useState } from "react";
 
 const RoomDetails = (props) => {
   const {
     params: { slug },
   } = props;
+
+  const [checkinDate, setcheckinDate] = useState(null);
+  const [checkoutDate, setcheckoutDate] = useState(null);
+
+  const [adults, setAdults] = useState(1);
+  const [noOfChildren, setNoOfChildren] = useState(0);
+
+  const calcMinCheckoutDate = () => {
+    if (checkinDate) {
+      const nextDay = new Date(checkinDate);
+      nextDay.setDate(nextDay.getDate() + 1);
+      return nextDay;
+    }
+    return null;
+  };
 
   const fetchRoom = async () => getRoom(slug);
 
@@ -113,6 +130,21 @@ const RoomDetails = (props) => {
 
           <div className="md:col-span-4 rounded-xl shadow-lg dark:shadow dark:shadow-white stickey top-10 h-fit overflow-auto">
             {/*Book Room CTA*/}
+            <BookRoomCta
+              price={room.price}
+              discount={room.discount}
+              specialNote={room.specialNote}
+              checkinDate={checkinDate}
+              setcheckinDate={setcheckinDate}
+              checkoutDate={checkoutDate}
+              setcheckoutDate={setcheckoutDate}
+              calcMinCheckoutDate={calcMinCheckoutDate}
+              noOfChildren={noOfChildren}
+              setNoOfChildren={setNoOfChildren}
+              adults={adults}
+              setAdults={setAdults}
+              isBooked={room.isBooked}
+            />
           </div>
         </div>
       </div>
